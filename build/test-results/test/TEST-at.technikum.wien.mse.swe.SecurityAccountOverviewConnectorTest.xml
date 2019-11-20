@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="at.technikum.wien.mse.swe.SecurityAccountOverviewConnectorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-11-20T15:49:50" hostname="DESKTOP-55P314A" time="0.034">
+  <properties/>
+  <testcase name="testRead_Balance" classname="at.technikum.wien.mse.swe.SecurityAccountOverviewConnectorTest" time="0.028"/>
+  <testcase name="testRead_notNull" classname="at.technikum.wien.mse.swe.SecurityAccountOverviewConnectorTest" time="0.001"/>
+  <testcase name="testRead_accountNumber" classname="at.technikum.wien.mse.swe.SecurityAccountOverviewConnectorTest" time="0.001"/>
+  <testcase name="testRead_DepotOwner" classname="at.technikum.wien.mse.swe.SecurityAccountOverviewConnectorTest" time="0.0"/>
+  <testcase name="testRead_riskCategory" classname="at.technikum.wien.mse.swe.SecurityAccountOverviewConnectorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

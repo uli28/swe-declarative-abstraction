@@ -1,6 +1,13 @@
-package at.technikum.wien.mse.swe.connector;
+package at.technikum.wien.mse.swe;
 
-import static org.apache.commons.lang.StringUtils.stripStart;
+import at.technikum.wien.mse.swe.connector.Alignment;
+import at.technikum.wien.mse.swe.connector.Connector;
+import at.technikum.wien.mse.swe.connector.DataField;
+import at.technikum.wien.mse.swe.exception.SecurityAccountOverviewReadException;
+import at.technikum.wien.mse.swe.model.Amount;
+import at.technikum.wien.mse.swe.model.DepotOwner;
+import at.technikum.wien.mse.swe.model.RiskCategory;
+import at.technikum.wien.mse.swe.model.SecurityAccountOverview;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,22 +15,13 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import at.technikum.wien.mse.swe.SecurityAccountOverviewConnector;
-import at.technikum.wien.mse.swe.exception.SecurityAccountOverviewReadException;
-import at.technikum.wien.mse.swe.model.Amount;
-import at.technikum.wien.mse.swe.model.DepotOwner;
-import at.technikum.wien.mse.swe.model.RiskCategory;
-import at.technikum.wien.mse.swe.model.SecurityAccountOverview;
-
 /**
  * @author MatthiasKreuzriegler
  */
-public class SecurityAccountOverviewConnectorImpl implements
+@Connector
+public class SecurityAccountOverviewConnectorTestImpl implements
         SecurityAccountOverviewConnector {
 
-    private static final int ACCOUNTNUMBER_START_INDEX = 40;
-    private static final int ACCOUNTNUMBER_LENGTH = 10;
-    private static final String ACCOUNTNUMBER_PADDING_CHAR = "0";
     private static final int RISKCATEGORY_START_INDEX = 50;
     private static final int RISKCATEGORY_LENGTH = 2;
     private static final int LASTNAME_START_INDEX = 52;
@@ -35,7 +33,7 @@ public class SecurityAccountOverviewConnectorImpl implements
     private static final int BALANCE_START_INDEX = 115;
     private static final int BALANCE_LENGTH = 17;
 
-    @DataField(position = "1", length = 10, padding = "0", alignment = Alignment.LEFT)
+    @DataField(position = "40", length = 10, padding = "0", alignment = Alignment.LEFT)
     private String accountNumber;
 
     @Override

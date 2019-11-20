@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="at.technikum.wien.mse.swe.SecurityConfigurationConnectorTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-11-20T15:49:50" hostname="DESKTOP-55P314A" time="0.016">
+  <properties/>
+  <testcase name="testRead_YearLowest" classname="at.technikum.wien.mse.swe.SecurityConfigurationConnectorTest" time="0.005"/>
+  <testcase name="testRead_Name" classname="at.technikum.wien.mse.swe.SecurityConfigurationConnectorTest" time="0.0"/>
+  <testcase name="testRead_isin" classname="at.technikum.wien.mse.swe.SecurityConfigurationConnectorTest" time="0.004"/>
+  <testcase name="testRead_notNull" classname="at.technikum.wien.mse.swe.SecurityConfigurationConnectorTest" time="0.002"/>
+  <testcase name="testRead_RiskCatedory" classname="at.technikum.wien.mse.swe.SecurityConfigurationConnectorTest" time="0.0"/>
+  <testcase name="testRead_YearHighest" classname="at.technikum.wien.mse.swe.SecurityConfigurationConnectorTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
+import at.technikum.wien.mse.swe.connector.ConnectorProcessor;
 import org.junit.Test;
 
 import at.technikum.wien.mse.swe.connector.SecurityAccountOverviewConnectorImpl;
@@ -30,9 +31,11 @@ public class SecurityAccountOverviewConnectorTest {
 
     @Test
     public void testRead_accountNumber() throws URISyntaxException {
-        SecurityAccountOverview overview = sut.read(Paths.get(ClassLoader.getSystemResource(FILENAME).toURI()));
-        assertNotNull("accountNumber not found", overview.getAccountNumber());
-        assertEquals("12345678", overview.getAccountNumber());
+        SecurityAccountOverviewConnector test = new SecurityAccountOverviewConnectorTestImpl();
+        ConnectorProcessor connectorProcessor = new ConnectorProcessor();
+        SecurityAccountOverview returnObject = (SecurityAccountOverview) connectorProcessor.convertFileToModel(test, Paths.get(ClassLoader.getSystemResource(FILENAME).toURI()));
+        assertNotNull("accountNumber not found", returnObject.getAccountNumber());
+        assertEquals("12345678", returnObject.getAccountNumber());
     }
 
     @Test
