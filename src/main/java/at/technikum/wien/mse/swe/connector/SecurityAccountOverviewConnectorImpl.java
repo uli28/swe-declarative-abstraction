@@ -35,9 +35,6 @@ public class SecurityAccountOverviewConnectorImpl implements
     private static final int BALANCE_START_INDEX = 115;
     private static final int BALANCE_LENGTH = 17;
 
-    @DataField(position = "1", length = 10, padding = "0", alignment = Alignment.LEFT)
-    private String accountNumber;
-
     @Override
     public SecurityAccountOverview read(Path file) {
         String content;
@@ -51,10 +48,9 @@ public class SecurityAccountOverviewConnectorImpl implements
 
     private SecurityAccountOverview mapOverview(String content) {
         SecurityAccountOverview overview = new SecurityAccountOverview();
-//        overview.setAccountNumber(stripStart(
-//                extract(content, ACCOUNTNUMBER_START_INDEX, ACCOUNTNUMBER_LENGTH),
-//                ACCOUNTNUMBER_PADDING_CHAR));
-        overview.setAccountNumber(accountNumber);
+        overview.setAccountNumber(stripStart(
+                extract(content, ACCOUNTNUMBER_START_INDEX, ACCOUNTNUMBER_LENGTH),
+                ACCOUNTNUMBER_PADDING_CHAR));
         overview.setRiskCategory(RiskCategory.fromCode(
                 extract(content, RISKCATEGORY_START_INDEX, RISKCATEGORY_LENGTH).trim())
                 .orElseThrow(IllegalStateException::new));

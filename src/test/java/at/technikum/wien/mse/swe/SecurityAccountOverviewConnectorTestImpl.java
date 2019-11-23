@@ -1,6 +1,7 @@
 package at.technikum.wien.mse.swe;
 
 import at.technikum.wien.mse.swe.connector.Alignment;
+import at.technikum.wien.mse.swe.connector.ComplexField;
 import at.technikum.wien.mse.swe.connector.Connector;
 import at.technikum.wien.mse.swe.connector.DataField;
 import at.technikum.wien.mse.swe.exception.SecurityAccountOverviewReadException;
@@ -22,19 +23,27 @@ import java.nio.file.Path;
 public class SecurityAccountOverviewConnectorTestImpl implements
         SecurityAccountOverviewConnector {
 
-    private static final int RISKCATEGORY_START_INDEX = 50;
-    private static final int RISKCATEGORY_LENGTH = 2;
-    private static final int LASTNAME_START_INDEX = 52;
-    private static final int LASTNAME_LENGTH = 30;
-    private static final int FIRSTNAME_START_INDEX = 82;
-    private static final int FIRSTNAME_LENGTH = 30;
-    private static final int CURRENCY_START_INDEX = 112;
-    private static final int CURRENCY_LENGTH = 3;
-    private static final int BALANCE_START_INDEX = 115;
-    private static final int BALANCE_LENGTH = 17;
-
-    @DataField(position = "40", length = 10, padding = "0", alignment = Alignment.LEFT)
+    @DataField(startIndex = 40, length = 10, padding = "0", alignment = Alignment.LEFT)
     private String accountNumber;
+
+    @DataField(startIndex = 50, length = 2, padding = "", alignment = Alignment.LEFT)
+    private RiskCategory riskCategory;
+
+    @ComplexField(fieldMapper =
+            {
+                    @DataField(name = "lastname", startIndex = 52, length = 30, padding = "", alignment = Alignment.RIGHT),
+                    @DataField(name = "firstname", startIndex = 82, length = 30, padding = "", alignment = Alignment.RIGHT)
+             }
+    )
+    private DepotOwner depotOwner;
+
+    @ComplexField(fieldMapper =
+            {
+                    @DataField(name = "currency", startIndex = 112, length = 3, padding = "", alignment = Alignment.LEFT),
+                    @DataField(name = "value", startIndex = 115, length = 17, padding = "", alignment = Alignment.LEFT)
+            }
+    )
+    private Amount amount;
 
     @Override
     public SecurityAccountOverview read(Path file) {
@@ -49,30 +58,6 @@ public class SecurityAccountOverviewConnectorTestImpl implements
 
     private SecurityAccountOverview mapOverview(String content) {
         SecurityAccountOverview overview = new SecurityAccountOverview();
-//        overview.setAccountNumber(stripStart(
-//                extract(content, ACCOUNTNUMBER_START_INDEX, ACCOUNTNUMBER_LENGTH),
-//                ACCOUNTNUMBER_PADDING_CHAR));
-        overview.setAccountNumber(accountNumber);
-        overview.setRiskCategory(RiskCategory.fromCode(
-                extract(content, RISKCATEGORY_START_INDEX, RISKCATEGORY_LENGTH).trim())
-                .orElseThrow(IllegalStateException::new));
-        overview.setDepotOwner(getDepotOwner(content));
-        String currency = extract(content, CURRENCY_START_INDEX, CURRENCY_LENGTH).trim();
-        BigDecimal balanceValue = BigDecimal.valueOf(
-                Double.valueOf(extract(content, BALANCE_START_INDEX, BALANCE_LENGTH)));
-        overview.setBalance(new Amount(currency, balanceValue));
         return overview;
     }
-
-    private DepotOwner getDepotOwner(String content) {
-        DepotOwner owner = new DepotOwner();
-        owner.setLastname(extract(content, LASTNAME_START_INDEX, LASTNAME_LENGTH).trim());
-        owner.setFirstname(extract(content, FIRSTNAME_START_INDEX, FIRSTNAME_LENGTH).trim());
-        return owner;
-    }
-
-    private String extract(String content, int startIndex, int length) {
-        return content.substring(startIndex, startIndex + length);
-    }
-
 }

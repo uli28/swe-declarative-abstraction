@@ -9,13 +9,8 @@ public enum Alignment {
 
     private final String alignment;
 
-    private Alignment(String alignment) {
+    Alignment(String alignment) {
         this.alignment = alignment;
-    }
-
-    Optional<Alignment> fromAlignment(String alignment) {
-        return Arrays.stream(values()).filter(al -> al.alignment.equalsIgnoreCase(alignment))
-                .findFirst();
     }
 
     @Override

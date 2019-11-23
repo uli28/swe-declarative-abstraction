@@ -1,7 +1,5 @@
 package at.technikum.wien.mse.swe.exception;
 
-import java.io.IOException;
-
 /**
  * @author MatthiasKreuzriegler
  */

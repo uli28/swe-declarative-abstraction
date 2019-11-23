@@ -10,7 +10,8 @@ import java.lang.annotation.Target;
 public @interface DataField {
     String BLANK_STRING = " ";
 
-    String position();
+    String name() default BLANK_STRING;
+    int startIndex();
     String padding() default BLANK_STRING;
     int length();
     Alignment alignment();
