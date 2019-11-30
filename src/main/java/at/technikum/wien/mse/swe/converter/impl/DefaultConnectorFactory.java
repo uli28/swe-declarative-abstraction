@@ -28,7 +28,6 @@ public class DefaultConnectorFactory<T> implements ConnectorFactory {
         return returnObject;
     }
 
-
     private String getStringOfFile(Path file) {
         try (BufferedReader reader = Files.newBufferedReader(file)) {
             return reader.readLine();
