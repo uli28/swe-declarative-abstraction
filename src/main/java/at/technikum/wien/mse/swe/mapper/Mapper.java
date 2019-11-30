@@ -1,4 +1,4 @@
-package at.technikum.wien.mse.swe.connector;
+package at.technikum.wien.mse.swe.mapper;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,5 +7,5 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Connector {
+public @interface Mapper {
 }

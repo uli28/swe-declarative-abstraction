@@ -1,7 +1,8 @@
 package at.technikum.wien.mse.swe;
 
-import at.technikum.wien.mse.swe.connector.ConnectorProcessor;
 import at.technikum.wien.mse.swe.connector.SecurityAccountOverviewConnectorImpl;
+import at.technikum.wien.mse.swe.converter.impl.DefaultConnectorFactory;
+import at.technikum.wien.mse.swe.mapper.SecurityAccountOverviewMapper;
 import at.technikum.wien.mse.swe.model.SecurityAccountOverview;
 import org.junit.Test;
 
@@ -14,25 +15,25 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * @author MatthiasKreuzriegler
+ * @author Ulrich Gram
  */
 public class SecurityAccountOverviewRefactoredConnectorTest {
 
     private final SecurityAccountOverviewConnector sut = new SecurityAccountOverviewConnectorImpl();
     private static final String FILENAME = "examples/SecurityAccountOverview_12345678.txt";
 
-
     @Test
     public void testRead_notNull() throws URISyntaxException {
-        SecurityAccountOverview overview = sut.read(Paths.get(ClassLoader.getSystemResource(FILENAME).toURI()));
+        SecurityAccountOverview overview = createSecurityAccountOverview();
         assertNotNull("overview not found", overview);
     }
 
+
     @Test
     public void testRead_accountNumber() throws URISyntaxException {
-        SecurityAccountOverview returnObject = createSecurityAccountOverview();
-        assertNotNull("accountNumber not found", returnObject.getAccountNumber());
-        assertEquals("12345678", returnObject.getAccountNumber());
+        SecurityAccountOverview overview = createSecurityAccountOverview();
+        assertNotNull("accountNumber not found", overview.getAccountNumber());
+        assertEquals("12345678", overview.getAccountNumber());
     }
 
     @Test
@@ -59,8 +60,8 @@ public class SecurityAccountOverviewRefactoredConnectorTest {
     }
 
     private SecurityAccountOverview createSecurityAccountOverview() throws URISyntaxException {
-        SecurityAccountOverviewConnector connector = new SecurityAccountOverviewConnectorTestImpl();
-        ConnectorProcessor connectorProcessor = new ConnectorProcessor();
-        return (SecurityAccountOverview) connectorProcessor.convertFileToModel(connector, Paths.get(ClassLoader.getSystemResource(FILENAME).toURI()));
+        return new DefaultConnectorFactory<SecurityAccountOverview>
+                (SecurityAccountOverviewMapper.class, SecurityAccountOverview.class)
+                .read(Paths.get(ClassLoader.getSystemResource(FILENAME).toURI()));
     }
 }

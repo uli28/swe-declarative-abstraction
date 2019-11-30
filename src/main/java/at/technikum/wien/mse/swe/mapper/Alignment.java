@@ -1,7 +1,4 @@
-package at.technikum.wien.mse.swe.connector;
-
-import java.util.Arrays;
-import java.util.Optional;
+package at.technikum.wien.mse.swe.mapper;
 
 public enum Alignment {
     LEFT("left"),

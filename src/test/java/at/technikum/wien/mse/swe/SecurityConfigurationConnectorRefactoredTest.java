@@ -1,7 +1,8 @@
 package at.technikum.wien.mse.swe;
 
-import at.technikum.wien.mse.swe.connector.ConnectorProcessor;
 import at.technikum.wien.mse.swe.connector.SecurityConfigurationConnectorImpl;
+import at.technikum.wien.mse.swe.converter.impl.DefaultConnectorFactory;
+import at.technikum.wien.mse.swe.mapper.SecurityConfigurationMapper;
 import at.technikum.wien.mse.swe.model.RiskCategory;
 import at.technikum.wien.mse.swe.model.SecurityConfiguration;
 import org.junit.Test;
@@ -14,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * @author MatthiasKreuzriegler
+ * @author Ulrich Gram
  */
 public class SecurityConfigurationConnectorRefactoredTest {
 
@@ -63,9 +64,8 @@ public class SecurityConfigurationConnectorRefactoredTest {
     }
 
     private SecurityConfiguration createSecurityAccountOverview() throws URISyntaxException {
-        SecurityConfigurationConnectorTestImpl connector = new SecurityConfigurationConnectorTestImpl();
-        ConnectorProcessor connectorProcessor = new ConnectorProcessor();
-        return (SecurityConfiguration) connectorProcessor.convertFileToModel(connector, Paths.get(ClassLoader.getSystemResource(FILENAME).toURI()));
+        return new DefaultConnectorFactory<SecurityConfiguration>
+                (SecurityConfigurationMapper.class, SecurityConfiguration.class)
+                .read(Paths.get(ClassLoader.getSystemResource(FILENAME).toURI()));
     }
-
 }

@@ -14,13 +14,12 @@ import at.technikum.wien.mse.swe.connector.SecurityAccountOverviewConnectorImpl;
 import at.technikum.wien.mse.swe.model.SecurityAccountOverview;
 
 /**
- * @author MatthiasKreuzriegler
+ * @author Ulrich Gram
  */
 public class SecurityAccountOverviewConnectorTest {
 
     private final SecurityAccountOverviewConnector sut = new SecurityAccountOverviewConnectorImpl();
     private static final String FILENAME = "examples/SecurityAccountOverview_12345678.txt";
-
 
     @Test
     public void testRead_notNull() throws URISyntaxException {
@@ -57,5 +56,4 @@ public class SecurityAccountOverviewConnectorTest {
         assertEquals("EUR", overview.getBalance().getCurrency());
         assertEquals(BigDecimal.valueOf(1692.45), overview.getBalance().getValue());
     }
-
 }
