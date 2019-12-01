@@ -1,5 +1,9 @@
 package at.technikum.wien.mse.swe.mapper;
 
+import at.technikum.wien.mse.swe.mapper.definitions.Alignment;
+import at.technikum.wien.mse.swe.mapper.definitions.ComplexField;
+import at.technikum.wien.mse.swe.mapper.definitions.DataField;
+import at.technikum.wien.mse.swe.mapper.definitions.Mapper;
 import at.technikum.wien.mse.swe.model.Amount;
 import at.technikum.wien.mse.swe.model.DepotOwner;
 import at.technikum.wien.mse.swe.model.RiskCategory;
