@@ -1,7 +1,6 @@
 package at.technikum.wien.mse.swe;
 
 import at.technikum.wien.mse.swe.creators.impl.DefaultConnectorFactory;
-import at.technikum.wien.mse.swe.mapper.SecurityConfigurationMapper;
 import at.technikum.wien.mse.swe.model.RiskCategory;
 import at.technikum.wien.mse.swe.model.SecurityConfiguration;
 import org.junit.Test;
@@ -65,7 +64,7 @@ public class SecurityConfigurationConnectorTest {
 
     private SecurityConfiguration createSecurityAccountOverview() throws URISyntaxException {
         return new DefaultConnectorFactory<SecurityConfiguration>
-                (SecurityConfigurationMapper.class, SecurityConfiguration.class)
+                (SecurityConfiguration.class, SecurityConfiguration.class)
                 .read(Paths.get(ClassLoader.getSystemResource(FILENAME).toURI()));
     }
 }

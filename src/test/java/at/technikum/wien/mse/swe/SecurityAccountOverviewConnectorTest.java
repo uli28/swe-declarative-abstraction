@@ -1,7 +1,7 @@
 package at.technikum.wien.mse.swe;
 
 import at.technikum.wien.mse.swe.creators.impl.DefaultConnectorFactory;
-import at.technikum.wien.mse.swe.mapper.SecurityAccountOverviewMapper;
+import at.technikum.wien.mse.swe.mapper.definitions.Mapper;
 import at.technikum.wien.mse.swe.model.SecurityAccountOverview;
 import org.junit.Test;
 
@@ -18,6 +18,7 @@ import static org.junit.Assert.assertNotNull;
  *
  * @author Ulrich Gram
  */
+@Mapper
 public class SecurityAccountOverviewConnectorTest {
 
     private static final String FILENAME = "examples/SecurityAccountOverview_12345678.txt";
@@ -60,7 +61,7 @@ public class SecurityAccountOverviewConnectorTest {
 
     private SecurityAccountOverview createSecurityAccountOverview() throws URISyntaxException {
         return new DefaultConnectorFactory<SecurityAccountOverview>
-                (SecurityAccountOverviewMapper.class, SecurityAccountOverview.class)
+                (SecurityAccountOverview.class, SecurityAccountOverview.class)
                 .read(Paths.get(ClassLoader.getSystemResource(FILENAME).toURI()));
     }
 }
